@@ -1,0 +1,32 @@
+#contests {
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contest {
+    text-align: center;
+    border-left: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+    float: left;
+    margin: 20px 0 0 20px;
+    padding: 20px;
+}
+
+.contest span {
+    font-size: 14px;
+}
+
+.contest a {
+    font-weight: bold;
+}
+
+.contest-header {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.participant {
+    margin: 5px;
+}

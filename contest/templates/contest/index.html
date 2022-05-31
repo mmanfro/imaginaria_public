@@ -1,0 +1,96 @@
+{% extends "imaginaria/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <title>_concursos</title>
+    <link href="{% static "contest/css/index.css" %}" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "contest/js/index.js" %}"></script>
+{% endblock head %}
+
+{% block content %}
+    <div id="contest-headers">
+        <a href="#" class="active" onclick="toggle_contests(event, 'present_contests')"><span>_</span>{% translate "em andamento" %}</a>
+        <a href="#" onclick="toggle_contests(event, 'future_contests')"><span>_</span>{% translate "próximos" %}</a>
+        <a href="#" onclick="toggle_contests(event, 'past_contests')"><span>_</span>{% translate "passados" %}</a>
+    </div>
+    <div id="contests-wrapper">
+        <div id="present_contests" class="contests-wrapper">
+            {% if present_contests %}
+                {% for contest in present_contests %}
+                    <div class="contest">
+                        <a href="{% url "contest:participant_list" contest_id=contest.id %}" class="contest-name">{{ contest.name }}</a>
+                        <br />
+                        <a href="#" class="contest-action">_{% translate "ver apuração" %}</a>
+                        <br />
+                        <br />
+                        <span><b>{% translate "Início" %}:</b> {{ contest.start_date }}</span>
+                        <br />
+                        <span><b>{% translate "Fim" %}:</b> {{ contest.end_date }}</span>
+                        <br />
+                    </div>
+
+                    {% comment %} <div id="participants_{{ contest.id }}" class="participant-modal">
+                        {% for participant in contest.participant_set.all %}
+                            <div class="participant">
+                                <span>{{ participant.name }}</span>
+                                <br />
+                                <span>{{ participant.work }}</span>
+                                <br />
+                                <span>{{ participant.rating_sum }}</span>
+                            </div>
+                        {% endfor %}
+                    </div> {% endcomment %}
+                {% endfor %}
+            {% else %}
+                <br />
+                {% translate "Nenhum concurso em andamento" %}.
+                <br />
+                <br />
+                <br />
+            {% endif %}
+        </div>
+        <div id="future_contests" class="contests-wrapper hidden">
+            {% if future_contests %}
+                {% for contest in future_contests %}
+                    <div class="contest">
+                        <a href="{% url "contest:participant_list" contest_id=contest.id %}" class="contest-name">{{ contest.name }}</a>
+                        <br />
+                        <span><b>{% translate "Início" %}:</b> {{ contest.start_date }}</span>
+                        <br />
+                        <span><b>{% translate "Fim" %}:</b> {{ contest.end_date }}</span>
+                        <br />
+                    </div>
+                {% endfor %}
+            {% else %}
+                <br />
+                {% translate "Nenhum concurso próximo" %}.
+                <br />
+                <br />
+                <br />
+            {% endif %}
+        </div>
+        <div id="past_contests" class="contests-wrapper hidden">
+            {% if past_contests %}
+                {% for contest in past_contests %}
+                    <div class="contest">
+                        <a href="{% url "contest:participant_list" contest_id=contest.id %}" class="contest-name">{{ contest.name }}</a>
+                        <br />
+                        <a href="#" class="contest-action">_{% translate "ver resultado" %}</a>
+                        <br />
+                        <span><b>{% translate "Início" %}:</b> {{ contest.start_date }}</span>
+                        <br />
+                        <span><b>{% translate "Fim" %}:</b> {{ contest.end_date }}</span>
+                        <br />
+                    </div>
+                {% endfor %}
+            {% else %}
+                <br />
+                {% translate "Nenhum concurso passado" %}.
+                <br />
+                <br />
+                <br />
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

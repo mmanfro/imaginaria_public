@@ -1,0 +1,29 @@
+{% load static %}
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'imaginaria/images/favicon.png' %}"
+    />
+    <link href="{% static 'imaginaria/css/root.css' %}" rel="stylesheet" />
+    <link href="{% static 'imaginaria/css/error.css' %}" rel="stylesheet" />
+    <title>imaginaria: Erro</title>
+  </head>
+  <body>
+    <img
+      src="{% static 'imaginaria/images/sad_dog.png' %}"
+      width="350px"
+    />
+    <p>
+      Desculpe, um erro ocorreu.
+      <br />
+      <a href="/">Clique aqui</a> para voltar para a página inicial.
+    </p>
+    <details>{{ exception }}</details>
+  </body>
+</html>

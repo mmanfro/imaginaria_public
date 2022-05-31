@@ -1,0 +1,113 @@
+body {
+  background-color: var(--content-background-color);
+}
+
+.content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-content {
+  width: 100%;
+  margin-left: 40px;
+  align-self: center;
+}
+
+.return {
+  color: white;
+  position: absolute;
+  top: 5;
+  left: 10;
+}
+
+.form {
+  width: 500px;
+  margin: auto;
+  display: flex;
+  background-color: var(--main-color);
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px gray;
+  padding: 20px;
+  position: relative;
+}
+
+.input {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: none;
+  width: 90%;
+  border-radius: 5px;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: inset 0px 0px 2px 1px gray;
+}
+
+.submit-btn {
+  padding: 10px;
+  border: none;
+  width: 90%;
+  background-color: ghostwhite;
+  color: var(--main-color);
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: inset 0px 0px 2px 1px #938884;
+}
+
+.messages {
+  width: 100%;
+  top: 0;
+  text-align: center;
+  box-shadow: 0px 0px 5px 3px gray;
+}
+
+.error {
+  background-color: var(--error-background-color);
+  color: var(--error-color);
+}
+
+.success {
+  background-color: var(--success-background-color);
+  color: var(--success-color);
+}
+
+.info {
+  background-color: var(--info-background-color);
+  color: var(--info-color);
+}
+
+.error,
+.success,
+.info {
+  padding: 5px;
+  border-bottom: 1px solid gainsboro;
+}
+
+@media screen and (max-width: 1000px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    row-gap: 20px;
+    background-color: var(--main-color);
+    border-radius: 0;
+    padding: 20px;
+  }
+
+  header {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-content {
+    align-self: center;
+  }
+}

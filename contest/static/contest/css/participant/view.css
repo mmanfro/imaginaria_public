@@ -1,0 +1,19 @@
+.contest-name {
+    text-align: center;
+}
+
+.contest-name a {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.contest-date {
+    font-size: 16px;
+}
+
+.participant-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

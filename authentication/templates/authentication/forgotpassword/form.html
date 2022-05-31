@@ -1,0 +1,19 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+{% block head %}
+    <link href="{% static "authentication/css/forgotpassword/form.css" %}" rel="stylesheet"/>
+    <title>Recuperar senha</title>
+{% endblock head %}
+{% block content %}
+    <div class="form">
+        <a class="return" href="{% url "authentication:login" %}">Voltar</a>
+        <img src="{% static "imaginaria/images/logo.png" %}"/>
+        <form method="POST" action="{% url "authentication:forgot_password_form" user_id_b64=user_id_b64 token=token %}">
+            {% csrf_token %}
+            <div class="form-content">
+                <div class="inputs">{{ form }}</div>
+                <input class="submit-btn" type="submit" value="Enviar" />
+            </div>
+        </form>
+    </div>
+{% endblock content %}

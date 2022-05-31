@@ -1,0 +1,46 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <link href="{% static "authentication/css/register/form.css" %}" rel="stylesheet"/>
+    <title>Cadastre-se</title>
+{% endblock head %}
+{% block content %}
+    <div class="form">
+        <a class="return" href="{% url "authentication:login" %}">Voltar</a>
+        <img src="{% static "imaginaria/images/logo.png" %}"/>
+        {% if success %}
+            {% blocktranslate %}
+                <p>
+                    Clique no link enviado para seu e&#8209;mail para ativar a conta.<br /><br />
+                    Caso não encontre o e-mail, <u>verifique sua caixa de spam</u>.
+                </p>
+            {% endblocktranslate %}
+        {% elif failed %}
+            {% blocktranslate %}
+                <p>
+                    Uma conta com este e-mail acabou de ser criada e se encontra <b>inativa</b>.<br /><br />
+                    <span>Clique no link enviado por e-mail para ativar a conta,</span>
+                    <span>solicite o reenvio do e-mail de ativação na página de login,</span>
+                    <span>ou tente registrar este e&#8209;mail novamente em <b class="time">{{ try_again_time }}</b> {{ try_again_time_type}}.</span>
+                </p>
+            {% endblocktranslate %}
+        {% else %}
+            <form method="POST" action="{% url "authentication:register_user" %}">
+                {% csrf_token %}
+                <div class="form-content">
+                    <div class="inputs">{{ form }}</div>
+                    <input class="submit-btn" type="submit" value="Cadastrar" />
+                    <div class="terms_and_conditions">
+                        <span>
+                            Ao se cadastrar, você concorda com nossos
+                            <a href="#">termos e condições</a>
+                            e <a href="#">política de privacidade</a>.
+                        </span>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock content %}

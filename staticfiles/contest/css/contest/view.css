@@ -1,0 +1,37 @@
+.contest {
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.contest .contest-date {
+  font-size: 14px;
+}
+
+.contest a {
+  color: var(--main-color);
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.contest .contest-name {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+#participants {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contest .participant {
+  padding: 10px;
+  margin: 5px;
+  text-align: left;
+}
+
+.contest .participant .participant-work {
+  font-size: 20px;
+}

@@ -1,0 +1,13 @@
+cd /home/imaginaria/ &&
+sudo chmod -R 777 . &&
+git reset --hard origin/main &&
+git pull
+sudo su -c "
+    pkill gunicorn;
+    cd /home/imaginaria/ &&
+    source venv/bin/activate &&
+    python manage.py makemigrations --no-input &&
+    python manage.py migrate &&
+    python manage.py collectstatic --no-input &&
+    gunicorn -b 0:8000 imaginaria.wsgi --daemon
+"

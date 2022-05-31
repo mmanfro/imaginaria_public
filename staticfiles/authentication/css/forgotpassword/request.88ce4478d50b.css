@@ -1,0 +1,4 @@
+.disabled-btn {
+    background-color: var(--content-background-color);
+    cursor: not-allowed;
+}

@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+{% comment %} {% load pwa %} {% endcomment %}
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <link rel="shortcut icon" type="image/png" href="{% static "imaginaria/images/favicon.png" %}" />
+        <link href="{% static "imaginaria/css/root.css" %}" rel="stylesheet" />
+        <link href="{% static "imaginaria/css/base.css" %}" rel="stylesheet" />
+        {% comment %} {% progressive_web_app_meta %} {% endcomment %}
+        <script src="{% static "imaginaria/js/htmx.min.js" %}"></script>
+        <script src="{% url "javascript-catalog" %}"></script>
+        <script>
+            var static_url = "{% get_static_prefix %}";
+            var media_url = "{% get_media_prefix %}";
+        </script>
+        <script type="text/javascript" src="{% static "imaginaria/js/base.js" %}"></script>
+        {% block head %}{% endblock head %}
+    </head>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <div id="loading" class="htmx-indicator">
+            <div id="loading-wheel"></div>
+        </div>
+
+        <div id="navbar">
+            <a href="/">
+                <img src="{% static "imaginaria/images/logo.png" %}" />
+            </a>
+            <div id="navbar-items">
+                
+                <a id="website" href="https://festivalimaginaria.com.br/" target="_blank">_website</a>
+                
+                <a id="contests" href="{% url "contest:index" %}">_concursos</a>
+                
+                {% if user.is_staff %}
+                <a id="admin" href="/admin" target="_blank">_administrador</a>
+                {% endif %}
+                
+                {% if user.is_authenticated %}
+                <a id="logout" href="{% url "authentication:logout" %}">_sair</a>
+                {% else %}
+                <a id="login" href="{% url "authentication:login" %}">_login</a>
+                {% endif %}
+                
+            </div>
+            <a id="delete_me" href="#">_deletar minha conta</a>
+        </div>
+        
+        {% include "imaginaria/messages.html" %}
+        <div id="content">
+            {% block content %}{% endblock content %}
+        </div>
+    </body>
+    </html>
+    

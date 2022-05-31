@@ -1,0 +1,55 @@
+{% load static %}
+{% load i18n %}
+
+<div class="video-container">
+    <div class="video">
+        <iframe src="{{ participant.video_url }}" scrolling="no"></iframe>
+    </div>
+</div>
+<div class="participant-votes_received">
+    <b>{{ participant.rating }}</b>
+    <img height="20px" src="{% static "imaginaria/images/LovelyHouse_empty.png" %}">
+</div>
+<a href="{% url "contest:participant_view" contest_id=participant.contest.id participant_id=participant.id %}" target="_blank" class="participant-work">
+    {{ participant.work }} 
+</a>
+<br />
+<span class="participant-name">{{ participant.name }}</span>
+<br />
+{% if participant.description %}
+    {% autoescape off %}
+        {% if pagination == "1" %}
+        <div style="margin-top: 10px;">
+            {{ participant.description }}
+        </div>
+        {% else %}
+            <details class="participant-description">
+                <summary>{% translate "Descrição" %}</summary>
+                <p>{{ participant.description }}</p>
+            </details>
+        {% endif %}
+    {% endautoescape %}
+{% endif %}
+{% if ongoing %}
+    {% if participant.vote_set %}
+        <div id="vote_{{ participant.id }}" class="vote" onmouseout="vote({{ participant.id }}, {{ participant.vote_set.get.vote|slugify }})">
+            {% for r in "54321" %}
+                <img
+                    id="vote_{{ participant.id }}_{{ r }}"
+                    name="{{ participant.id }}_{{ r }}"
+                    onmouseover="vote({{ participant.id }}, {{ r }})" height="20px"
+                    src="{% if r <= participant.vote_set.get.vote|slugify %}
+                            {% static "imaginaria/images/LovelyHouse_filled.png" %}
+                        {% else %}
+                            {% static "imaginaria/images/LovelyHouse_empty.png" %}
+                        {% endif %}"
+                    hx-post="{% url "contest:vote" %}"
+                    hx-trigger="click[is_authenticated({{ user.is_authenticated|slugify }}, gettext('Você precisa estar logado para votar'))]"
+                    hx-target="#participant-container_{{ participant.id }}"
+                    hx-vals='{"participant_id": {{ participant.id }}, "vote": {{ r }}}'
+                    hx-indicator="#loading"
+                    >
+            {% endfor %}
+        </div>    
+    {% endif %}
+{% endif %}

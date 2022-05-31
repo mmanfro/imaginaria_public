@@ -1,0 +1,38 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <script type="text/javascript" src="{% static "authentication/js/login.js" %}"></script>
+    <link href="{% static "authentication/css/login.css" %}" rel="stylesheet" />
+    <title>Login</title>
+{% endblock head %}
+{% block content %}
+    <div class="form">
+        <a href="/"><img src="{% static "imaginaria/images/logo.png" %}"/></a>
+        <form method="POST" action="{% url "authentication:login" %}">
+            {% csrf_token %}
+            <div class="form-content">
+                <div class="inputs">
+                    <input id="email" class="input" type="email" name="email" placeholder="E-mail" autocomplete="username email" required autofocus/>
+                    <input class="input" type="password" name="password" placeholder="Senha" required autocomplete="password"/>
+                    <input class="submit-btn" type="submit" value="Entrar" />
+                </div>
+                <div class="extra-actions">
+                    <a href="{% url "authentication:send_forgot_password_mail" %}"
+                    class="secondary-button">{% translate "Esqueci minha senha" %}</a>
+                    <a href="{% url "authentication:register_user" %}"
+                    class="secondary-button">{% translate "Cadastre-se" %}</a>
+                    <a href="#" class="secondary-action"
+                        hx-post="{% url "authentication:resend_activation_email" %}"
+                        hx-trigger="click[check_email()]"
+                        hx-params="csrfmiddlewaretoken,email"
+                        hx-target="body"
+                        hx-indicator="#loading">
+                        _{% translate "reenviar link de ativação" %}
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends "imaginaria/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <title>{{ contest.name }}</title>
+    <link href="{% static "contest/css/participant/list.css" %}" rel="stylesheet" />
+    <link href="{% static "contest/css/participant/_participant.css" %}" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "contest/js/participant/_participant.js" %}"></script>
+{% endblock head %}
+
+{% block content %}
+    <div class="contest">
+        <div class="view-type">
+            <a href="?search={{ search }}" class="selected">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5v-8zM1.5 3a.5.5 0 0 0-.5.5V7h4V3H1.5zM5 8H1v3.5a.5.5 0 0 0 .5.5H5V8zm1 0v4h4V8H6zm4-1V3H6v4h4zm1 1v4h3.5a.5.5 0 0 0 .5-.5V8h-4zm0-1h4V3.5a.5.5 0 0 0-.5-.5H11v4z"/>
+                </svg>
+            </a>
+            <a href="?search={{ search }}&pagination=4" class="selected">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                </svg>
+            </a>
+            <a href="?search={{ search }}&pagination=1" class="selected">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                </svg>
+            </a>
+        </div>
+        <header class="contest-name">
+            <a href="{% url "contest:participant_list" contest_id=contest.id %}">{{ contest.name }}</a>
+            <br />
+            <span class="contest-date"><b>{% translate "Início" %}:</b> {{ contest.start_date }}</span>
+            <br />
+            <span class="contest-date"><b>{% translate "Fim" %}:</b> {{ contest.end_date }}</span>
+        </header>
+        <form class="search" method="GET" action="{% url "contest:participant_list" contest_id=contest.id %}">
+            {% csrf_token %}
+            <input name="search" type="text" placeholder="{% translate "Pesquisar" %}" value="{{ search }}">
+            <input type="submit" value="_{% translate "ir" %}">
+            {% if search %}
+                <input type="button" value="_{% translate "limpar" %}" onclick="window.location.replace(location.pathname);">
+            {% endif %}
+        </form>
+        <hr style="border-top: 2px solid var(--complementary-color); margin-top: 10px">
+        <div id="participant-grid">
+            {% for participant in participants %}
+                <div id="participant-container_{{ participant.id }}" class="participant {% if pagination == "1" %}featured {% elif pagination == "4" %}quatro{% endif %}">
+                    {% include "contest/participant/_participant.html" %}
+                </div>
+            {% endfor %}
+        </div>
+        {% if participants.has_other_pages %}
+            <ul class="pagination">
+                {% if participants.has_previous %}
+                    <li>
+                        <a href="?search={{ search }}&pagination={{ pagination }}&page={{ participants.previous_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 -3 16 16">
+                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                            </svg>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 -3 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                        </svg>
+                    </li>
+                {% endif %}
+                {% for i in participants.paginator.page_range %}
+                    {% if participants.number == i %}
+                        <li class="active"><span>{{ i }}</span></li>
+                    {% else %}
+                        <li><a href="?search={{ search }}&pagination={{ pagination }}&page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if participants.has_next %}
+                    <li>
+                        <a href="?search={{ search }}&pagination={{ pagination }}&page={{ participants.next_page_number }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 -3 16 16">
+                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 -3 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock content %}
+

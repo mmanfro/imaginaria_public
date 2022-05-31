@@ -1,0 +1,32 @@
+:root {
+    --main-color: #ff1d25;
+    --complementary-color: #b7d7f3;
+    --secondary-color: cornflowerblue;
+    --tertiary-color: #00ff69;
+    --content-background-color: ghostwhite;
+    --error-background-color: #ff7f7f;
+    --error-color: #890000;
+    --success-background-color: #7fbf9f;
+    --success-color: #00592c;
+    --info-background-color: #7fbfff;
+    --info-color: #00478e;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"), url("../fonts/Roboto-Regular.f36638c2135b.ttf") format("truetype");
+}
+
+* {
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto";
+    outline: none !important;
+}
+
+::selection {
+    background-color: #0077cc5d;
+}

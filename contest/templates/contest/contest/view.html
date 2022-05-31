@@ -1,0 +1,32 @@
+{% extends "imaginaria/base.html" %}
+{% load static %}
+
+{% block head %}
+    <link href="{% static "contest/css/contest/view.css" %}" rel="stylesheet" />
+{% endblock head %}
+
+{% block content %}
+    <div class="contest">
+        <header class="contest-name">{{ contest.name }}
+            <a href="{% url "contest:participant_list" contest_id=contest.id %}">Votar</a>
+        </header>
+        <br />
+        <span class="contest-date"><b>Início:</b> {{ contest.start_date }}</span>
+        <br />
+        <span class="contest-date"><b>Fim:</b> {{ contest.end_date }}</span>
+        <hr style="border-top: 2px solid var(--secondary-color); margin-top: 20px">
+        <div id="participants">
+            {% for participant in participants %}
+                <div class="participant">
+                    <span class="participant-work">{{ participant.work }} - {{ participant.rating_sum }} 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="var(--main-color)" viewBox="0 0 20 12">
+                            <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                        </svg>
+                    </span>
+                    <br />
+                    <span class="participant-name">{{ participant.name }}</span>
+                </div>
+            {% endfor %}
+            </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+{% block head %}
+    <link href="{% static "authentication/css/forgotpassword/request.css" %}" rel="stylesheet"/>
+    <title>Recuperar senha</title>
+{% endblock head %}
+{% block content %}
+    <div class="form">
+        <a class="return" href="{% url "authentication:login" %}">Voltar</a>
+        <img src="{% static "imaginaria/images/logo.png" %}"/>
+        {% if POST %}
+            <span>O link para troca de senha foi enviado para o e-mail informado.</span>
+        {% else %}
+            <form method="POST" action="{% url "authentication:send_forgot_password_mail" %}">
+                {% csrf_token %}
+                <div class="form-content">
+                    <div class="inputs">
+                        <input class="input" type="email" name="email" placeholder="E-mail" required />
+                        <input class="submit-btn" type="submit" value="Enviar"/>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock content %}

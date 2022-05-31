@@ -1,0 +1,24 @@
+{% extends "imaginaria/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+    <link href="{% static "contest/css/participant/view.css" %}" rel="stylesheet" />
+    <link href="{% static "contest/css/participant/_participant.css" %}" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "contest/js/participant/_participant.js" %}"></script>
+{% endblock head %}
+
+{% block content %}
+    <header class="contest-name">
+        <a href="{% url "contest:participant_list" contest_id=participant.contest.id %}">{{ participant.contest.name }}</a>
+        <br />
+        <span class="contest-date"><b>{% translate "Início" %}:</b> {{ participant.contest.start_date }}</span>
+        <br />
+        <span class="contest-date"><b>{% translate "Fim" %}:</b> {{ participant.contest.end_date }}</span>
+    </header>
+    <div class="participant-wrapper">
+        <div id="participant-container_{{ participant.id }}" class="participant featured">
+            {% include "contest/participant/_participant.html" %}
+        </div>
+    </div>
+{% endblock content %}

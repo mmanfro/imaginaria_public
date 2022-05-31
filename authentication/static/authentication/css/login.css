@@ -1,0 +1,32 @@
+.extra-actions {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 90%;
+    text-align: center;
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid white;
+    word-break: normal;
+    color: ghostwhite;
+}
+
+.secondary-button:focus {
+    outline: none;
+    box-shadow: 0px 0px 0px 1px white;
+}
+
+.secondary-action {
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    float: right;
+    bottom: 5;
+    right: 5;
+}

@@ -1,0 +1,151 @@
+.contest {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+}
+
+.contest .search {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: left;
+    column-gap: 10px;
+}
+
+.contest .search input[type="text"] {
+    width: 250px;
+    padding: 5px;
+    border: 1px solid var(--main-color);
+    box-shadow: 2px 2px 1px 0px gainsboro;
+}
+
+.contest .search input[type="submit"] {
+    padding: 5px;
+    border: 1px solid var(--main-color);
+    background-color: ghostwhite;
+    box-shadow: 2px 2px 1px 0px gainsboro;
+    cursor: pointer;
+}
+
+.contest .search input[type="button"] {
+    padding: 5px;
+    border: 1px solid var(--main-color);
+    background-color: ghostwhite;
+    box-shadow: 2px 2px 1px 0px gainsboro;
+    cursor: pointer;
+}
+
+.contest .contest-date {
+    font-size: 14px;
+}
+
+.contest .contest-name {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+#participant-grid {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 25px;
+    justify-content: space-around;
+}
+
+.contest .participant {
+    padding: 10px;
+    margin: 5px;
+    text-align: left;
+    position: relative;
+}
+
+.contest .participant iframe {
+    border: none;
+}
+
+.contest .participant .participant-ratings_received {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    column-gap: 5px;
+    flex-direction: row;
+    align-items: center;
+    font-size: 20px;
+}
+
+.contest .participant .participant-work {
+    font-size: 20px;
+}
+
+.contest .participant .participant-description {
+    word-wrap: break-word;
+    width: 350px;
+}
+
+#participant-grid .rating,
+#participant-grid .rating_received {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 25px;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+#participant-grid .rating img,
+#participant-grid .rating_received img {
+    transform: rotate(270deg);
+    cursor: pointer;
+}
+
+.pagination {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+ul.pagination li {
+    display: inline;
+}
+
+ul.pagination li.disabled {
+    color: var(--complementary-color);
+}
+
+ul.pagination li.active {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+#participant-list table {
+    border-collapse: collapse;
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 20px;
+}
+
+#participant-list table td a {
+    color: var(--secondary-color);
+}
+
+#participant-list table td,
+th {
+    border-left: 1px solid var(--secondary-color);
+    border-right: 1px solid var(--secondary-color);
+    border-bottom: 1px solid var(--secondary-color);
+    text-align: left;
+    padding: 8px;
+}
+
+#participant-list table tr:nth-child(even) {
+    background-color: gainsboro;
+}
+
+#participant-list .rating {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+}

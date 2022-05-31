@@ -1,0 +1,28 @@
+.form p {
+    color: white;
+    margin-left: 40px;
+    margin-right: 20px;
+    text-align: justify;
+}
+
+.form p .success {
+    border: 1px solid ghostwhite;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.form p .time {
+    display: inline-block;
+}
+
+.terms_and_conditions {
+    color: white;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.terms_and_conditions a {
+    color: white;
+    font-weight: bold;
+}

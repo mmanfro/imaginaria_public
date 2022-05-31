@@ -1,0 +1,22 @@
+{% load static %}
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+        <link rel="shortcut icon" type="image/png" href="{% static "imaginaria/images/favicon.png" %}"/>
+        <link href="{% static "imaginaria/css/root.css" %}" rel="stylesheet" />
+        <link href="{% static "authentication/css/base.css" %}" rel="stylesheet" />
+        <script src="{% static "imaginaria/js/htmx.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "authentication/js/base.js" %}"></script>
+        {% block head %}{% endblock head %}
+    </head>
+    <body>
+        <div id="loading" class="htmx-indicator">
+            <div id="loading-wheel"></div>
+        </div>
+        <div class="content">
+            {% include "imaginaria/messages.html" %}
+            {% block content %}{% endblock content %}
+        </div>
+    </body>
+</html>
